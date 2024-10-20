@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 import { TimeLineConfig } from "@/config/timeLine";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
 
@@ -37,22 +37,35 @@ export default function Timeline({ timeLine }: { timeLine: TimeLineConfig }) {
 
 function YearBlock({ year, months }: { year: string; months: number[] }) {
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   return (
     <div className="flex flex-col w-1/2">
       <h4 className="text-lg font-bold">{year}</h4>
-      <Listbox items={months.map((month) => ({ key: month, label: monthNames[month] }))}>
+      <Listbox
+        items={months.map((month) => ({
+          key: month,
+          label: monthNames[month],
+        }))}
+      >
         {(item) => (
           <ListboxItem
             key={`${year}-${item.key}`}
             className="text-sm text-gray-500"
           >
-            <Link href={`#year-${year}-0`}>
-              {item.label}
-            </Link>
+            <Link href={`#year-${year}-0`}>{item.label}</Link>
           </ListboxItem>
         )}
       </Listbox>

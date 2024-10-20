@@ -4,17 +4,17 @@ import { NamecardConfig } from "@/config/nameCard";
 
 export default function NameCard({ nameCard }: { nameCard: NamecardConfig }) {
   return (
-    <div className={`
+    <div
+      className={`
       w-full h-full 
       rounded-lg p-4
       ring-2 ring-red-400 ring-inset
-    `}>
+    `}
+    >
       <Card className="bg-background/0 border-orange-600">
         <CardHeader className="">
           <div className="text-white p-4">
-            <h1 className="text-2xl font-bold">
-              {nameCard.name}
-            </h1>
+            <h1 className="text-2xl font-bold">{nameCard.name}</h1>
           </div>
         </CardHeader>
         <Divider />
@@ -22,9 +22,7 @@ export default function NameCard({ nameCard }: { nameCard: NamecardConfig }) {
           <div className="text-white p-4">
             <p>{nameCard.introduction}</p>
           </div>
-          <p className="text-white p-4">
-            Namecard Under Construction.
-          </p>
+          <p className="text-white p-4">Namecard Under Construction.</p>
         </CardBody>
       </Card>
     </div>

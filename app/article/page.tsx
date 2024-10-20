@@ -33,10 +33,10 @@ export default function Article() {
     const sortedPostCard = postCard.sort((a, b) => {
       return b.date.getTime() - a.date.getTime();
     });
-    
-    const timeLineArray = sortedPostCard.map(post => ({ date: post.date }));
+
+    const timeLineArray = sortedPostCard.map((post) => ({ date: post.date }));
     setTimeLine(timeLineArray);
-    
+
     return sortedPostCard;
   }
 

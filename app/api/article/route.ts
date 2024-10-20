@@ -1,10 +1,13 @@
-import { NextResponse } from 'next/server';
-import { postCard } from '@/config/postCard';
-import { nameCard } from '@/config/nameCard';
+import { NextResponse } from "next/server";
+import { postCard } from "@/config/postCard";
+import { nameCard } from "@/config/nameCard";
 
 // GET /api/article
 export async function GET(request: Request) {
-    return NextResponse.json({ postCard: postCard, nameCard: nameCard }, { status: 200 });
+  return NextResponse.json(
+    { postCard: postCard, nameCard: nameCard },
+    { status: 200 },
+  );
 }
 
 // POST /api/article

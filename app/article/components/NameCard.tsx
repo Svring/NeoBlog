@@ -7,7 +7,6 @@ export default function NameCard({ namecard }: { namecard: NamecardConfig }) {
     <div className={`
       w-full h-full 
       rounded-lg p-4
-      bg-gradient-to-tr from-black from-60% to-slate-600 
       ring-2 ring-red-400 ring-inset
     `}>
       <Card className="bg-background/0 border-orange-600">

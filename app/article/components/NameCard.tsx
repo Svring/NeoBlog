@@ -2,7 +2,7 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { NamecardConfig } from "@/config/nameCard";
 
-export default function NameCard({ namecard }: { namecard: NamecardConfig }) {
+export default function NameCard({ nameCard }: { nameCard: NamecardConfig }) {
   return (
     <div className={`
       w-full h-full 
@@ -13,14 +13,14 @@ export default function NameCard({ namecard }: { namecard: NamecardConfig }) {
         <CardHeader className="">
           <div className="text-white p-4">
             <h1 className="text-2xl font-bold">
-              {namecard.name}
+              {nameCard.name}
             </h1>
           </div>
         </CardHeader>
         <Divider />
         <CardBody className="bg-transparent">
           <div className="text-white p-4">
-            <p>{namecard.introduction}</p>
+            <p>{nameCard.introduction}</p>
           </div>
           <p className="text-white p-4">
             Namecard Under Construction.

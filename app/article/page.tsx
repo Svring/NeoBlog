@@ -7,6 +7,7 @@ import Timeline from "./components/Timeline";
 
 import { PostCardConfig } from "@/config/postCard";
 import { NamecardConfig } from "@/config/nameCard";
+import { TimeLineConfig } from "@/config/timeLine";
 
 export default function Article() {
   let [postCard, setPostCard] = useState<PostCardConfig>([]);
@@ -14,27 +15,41 @@ export default function Article() {
     name: "",
     introduction: "",
   });
+  let [timeLine, setTimeLine] = useState<TimeLineConfig>([]);
 
   useEffect(() => {
     fetch("/api/article")
       .then((res) => res.json())
       .then((data) => {
-        console.log("data", data);
-        setPostCard(data.postCard);
+        setPostCard(sortByTime(data.postCard));
         setNameCard(data.nameCard);
       });
   }, []);
 
+  function sortByTime(postCard: PostCardConfig) {
+    postCard.map((post) => {
+      post.date = new Date(post.date);
+    });
+    const sortedPostCard = postCard.sort((a, b) => {
+      return b.date.getTime() - a.date.getTime();
+    });
+    
+    const timeLineArray = sortedPostCard.map(post => ({ date: post.date }));
+    setTimeLine(timeLineArray);
+    
+    return sortedPostCard;
+  }
+
   return (
     <section className="flex flex-row w-full justify-between">
       <div className="w-1/4 h-screen">
-        <NameCard namecard={nameCard} />
+        <NameCard nameCard={nameCard} />
       </div>
       <div className="w-1/2 h-screen border-2 border-red-500">
         <PostList postCard={postCard} />
       </div>
       <div className="w-1/5 h-screen border-2 border-red-500">
-        <Timeline />
+        <Timeline timeLine={timeLine} />
       </div>
     </section>
   );

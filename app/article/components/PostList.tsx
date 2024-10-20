@@ -26,7 +26,7 @@ function PostCard({ postCard }: { postCard: PostCardConfig[number] }) {
           <div className="flex flex-col border-2 border-blue-500">
             <h1 className="text-2xl font-bold">{postCard.title}</h1>
             <div className="flex flex-row gap-2">
-              <p className="text-sm text-gray-500">{postCard.date}</p>
+              <p className="text-sm text-gray-500">{new Date(postCard.date).toLocaleDateString()}</p>
               <p className="text-sm text-gray-500">{postCard.tags.join(", ")}</p>
             </div>
             <p className="text-sm text-gray-500">{postCard.description}</p>

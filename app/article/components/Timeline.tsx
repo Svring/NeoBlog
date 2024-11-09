@@ -25,7 +25,7 @@ export default function Timeline({ timeLine }: { timeLine: TimeLineConfig }) {
   const processedTimeLine = processTimeLine(timeLine);
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center gap-4 p-4 border-2 border-blue-500">
+    <div className="w-full h-full flex flex-col justify-start items-center gap-4 p-4 border-2 border-blue-500">
       {Object.entries(processedTimeLine)
         .sort((a, b) => parseInt(b[0]) - parseInt(a[0])) // Sort years in descending order
         .map(([year, months]) => (

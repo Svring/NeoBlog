@@ -5,7 +5,7 @@ import NameCard from "./components/NameCard";
 import PostList from "./components/PostList";
 import Timeline from "./components/Timeline";
 
-import { PostCardConfig } from "@/config/postCard";
+import { PostCardConfig, sortByTime } from "@/config/postCard";
 import { NamecardConfig } from "@/config/nameCard";
 import { TimeLineConfig } from "@/config/timeLine";
 
@@ -21,36 +21,30 @@ export default function Article() {
     fetch("/api/article")
       .then((res) => res.json())
       .then((data) => {
-        setPostCard(sortByTime(data.postCard));
+        const { posts, timeline } = sortByTime(data.postCard);
+        setPostCard(posts);
+        setTimeLine(timeline);
         setNameCard(data.nameCard);
+      });
+
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
       });
   }, []);
 
-  function sortByTime(postCard: PostCardConfig) {
-    postCard.map((post) => {
-      post.date = new Date(post.date);
-    });
-    const sortedPostCard = postCard.sort((a, b) => {
-      return b.date.getTime() - a.date.getTime();
-    });
-
-    const timeLineArray = sortedPostCard.map((post) => ({ date: post.date }));
-    setTimeLine(timeLineArray);
-
-    return sortedPostCard;
-  }
-
   return (
-    <section className="flex flex-row w-full justify-between">
-      <div className="w-1/4 h-screen">
+    <div className="flex flex-row w-full h-screen justify-between p-2 box-border">
+      <div className="w-1/4">
         <NameCard nameCard={nameCard} />
       </div>
-      <div className="w-1/2 h-screen border-2 border-red-500">
+      <div className="w-1/2 border-2 border-red-500">
         <PostList postCard={postCard} />
       </div>
-      <div className="w-1/5 h-screen border-2 border-red-500">
+      <div className="w-1/5 border-2 border-red-500">
         <Timeline timeLine={timeLine} />
       </div>
-    </section>
+    </div>
   );
 }

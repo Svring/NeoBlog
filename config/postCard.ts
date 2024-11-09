@@ -1,5 +1,20 @@
 export type PostCardConfig = typeof postCard;
 
+export function sortByTime(postCard: PostCardConfig) {
+  const clonedPostCard = postCard.map(post => ({
+    ...post,
+    date: new Date(post.date)
+  }));
+  
+  const sortedPosts = clonedPostCard.sort((a, b) => b.date.getTime() - a.date.getTime());
+  const timeline = sortedPosts.map(post => ({ date: post.date }));
+  
+  return {
+    posts: sortedPosts,
+    timeline: timeline
+  };
+}
+
 export const postCard = [
   {
     title: "PostCard",

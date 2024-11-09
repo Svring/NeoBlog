@@ -13,7 +13,7 @@ export default function NameCard({ nameCard }: { nameCard: NamecardConfig }) {
     >
       <Card className="bg-background/0 border-orange-600">
         <CardHeader className="">
-          <div className="text-white p-4">
+          <div className="text-white p-4 ring-2 ring-red-400 ring-inset">
             <h1 className="text-2xl font-bold">{nameCard.name}</h1>
           </div>
         </CardHeader>

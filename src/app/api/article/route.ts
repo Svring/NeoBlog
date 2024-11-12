@@ -6,7 +6,10 @@ import mongoose from "mongoose";
 const uri = process.env.MONGODB_URI!;
 
 // GET /api/article
-export async function GET(request: Request) {
+export async function GET(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _request: Request
+) {
   try {
     console.log("Connecting to MongoDB...");
     // Connect to MongoDB if not already connected
@@ -22,7 +25,7 @@ export async function GET(request: Request) {
       nameConfig: nameConfig
     }, { status: 200 });
 
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
 }

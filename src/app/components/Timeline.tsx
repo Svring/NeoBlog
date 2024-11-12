@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { TimeLineConfig } from "@/configs/timeLine";
 import { Flex, Heading, Text } from "@radix-ui/themes";
 

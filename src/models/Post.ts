@@ -49,7 +49,7 @@ const PostSchema = new Schema({
 
 PostSchema.statics.getSortedPostsWithTimeline = async function() {
   const posts = await this.find({}).sort({ createdAt: -1 });
-  const timeline = posts.map((post: { createdAt: any; }) => ({ date: post.createdAt }));
+  const timeline = posts.map((post: IPost) => ({ date: post.createdAt }));
   return { posts, timeline };
 };
 

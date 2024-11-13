@@ -2,6 +2,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 // Interface for the Post document
 export interface IPost extends Document {
+  _id: string;  // Add explicit _id field
+  id: string;  
   title: string;
   cover: Buffer;
   tags: string[];
@@ -54,6 +56,6 @@ PostSchema.statics.getSortedPostsWithTimeline = async function() {
 };
 
 // Create and export the model
-const Post = mongoose.models.Post || mongoose.model<IPost, PostModel>('Post', PostSchema);
+const Post = (mongoose.models.Post || mongoose.model<IPost, PostModel>('Post', PostSchema)) as mongoose.Model<IPost, {}, {}, {}, any, any> & PostModel;
 
-export default Post as PostModel;
+export default Post;

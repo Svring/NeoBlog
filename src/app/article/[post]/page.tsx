@@ -1,20 +1,7 @@
 import { notFound } from "next/navigation";
 import mongoose from "mongoose";
 import Post from "@/models/Post";
-
-export async function generateStaticParams() {
-    const uri = process.env.MONGODB_URI!;
-
-    if (mongoose.connection.readyState === 0) {
-        await mongoose.connect(uri);
-    }
-
-    const posts = await Post.find({});
-
-    return posts.map((post) => ({
-        post: post._id.toString(),
-    }));
-}
+// import MDXPage from "./mdxpage.mdx";
 
 async function getPost(postId: string) {
     try {
@@ -50,6 +37,7 @@ export default async function Page({
 
     return (
         <div>
+            {/* <MDXPage /> */}
             <p>{post.content}</p>
         </div>
     );

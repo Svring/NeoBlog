@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Provider from "./provider";
+import Provider from "./styleProvider";
 import "@/styles/globals.css";
 import "@radix-ui/themes/styles.css";
 

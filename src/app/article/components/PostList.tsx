@@ -4,8 +4,18 @@ import { Card, Flex, Badge, Text, Heading, Separator } from "@radix-ui/themes";
 import { IPost } from "@/models/Post";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { initialize } from "@/redux/features/posts/postsSlice";
+
+/**
+ * TODO: Implement post preview with parallel route and route interception
+ * @deadline 2077-01-01
+ */
 
 export default function PostList({ posts }: { posts: IPost[] }) {
+  const dispatch = useDispatch();
+  dispatch(initialize(posts));
+
   return (
     <Flex key={posts.length} direction="column" gap="4" width="100%" height="100%" p="2"
       className="overflow-y-auto" style={{ scrollbarWidth: 'none' }}>

@@ -56,6 +56,6 @@ PostSchema.statics.getSortedPostsWithTimeline = async function() {
 };
 
 // Create and export the model
-const Post = (mongoose.models.Post || mongoose.model<IPost, PostModel>('Post', PostSchema)) as mongoose.Model<IPost, {}, {}, {}, any, any> & PostModel;
+const Post = mongoose.model<IPost, PostModel>('Post', PostSchema);
 
-export default Post;
+export default Post as PostModel;

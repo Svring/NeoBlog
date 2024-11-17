@@ -1,47 +1,50 @@
-// const { MongoClient } = require('mongodb');
-// const path = require('path');
-// const dotenv = require('dotenv');
+const { MongoClient } = require('mongodb');
+const path = require('path');
+const dotenv = require('dotenv');
+const fs = require('fs');
 
-// dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
+dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
 
-// const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 
-// const fs = require('fs');
-
-// async function insertPosts() {
-//     const client = new MongoClient(uri);
+async function insertPosts() {
+    const client = new MongoClient(uri);
     
-//     try {
-//         // Read the image file and convert to buffer
-//         const imagePath = path.join(__dirname, '../public/abstract.jpeg');
-//         const imageBuffer = fs.readFileSync(imagePath);
+    try {
+        // Read the image file and convert to buffer
+        const imagePath = path.join(__dirname, '../public/abstract.jpeg');
+        const imageBuffer = fs.readFileSync(imagePath);
 
-//         await client.connect();
-//         const db = client.db('blog');
-//         const posts = db.collection('posts');
+        // Read the MDX content
+        const mdxPath = path.join(__dirname, '../src/app/mdx/page.mdx');
+        const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
 
-//         // Clear existing posts
-//         await posts.deleteMany({});
+        await client.connect();
+        const db = client.db('blog');
+        const posts = db.collection('posts');
 
-//         // Insert new posts using the actual image
-//         const result = await posts.insertMany([{
-//             title: "Test Post",
-//             description: "This is a test post description",
-//             content: "This is the main content of the test post",
-//             tags: ["test", "dummy"],
-//             cover: imageBuffer,
-//             createdAt: new Date("2024-01-01"),
-//             updatedAt: new Date("2025-01-01")
-//         }]);
+        // Clear existing posts
+        await posts.deleteMany({});
 
-//         console.log(`${result.insertedCount} documents were inserted`);
-//     } catch (error) {
-//         console.error('Error:', error);
-//     } finally {
-//         await client.close();
-//     }
-// }
+        // Insert new posts with MDX content
+        const result = await posts.insertMany([{
+            title: "Test Post",
+            description: "This is a test post description",
+            content: mdxContent,  // 使用 MDX 文件内容
+            tags: ["test", "dummy"],
+            cover: imageBuffer,
+            createdAt: new Date("2024-01-01"),
+            updatedAt: new Date("2025-01-01")
+        }]);
 
-// insertPosts();
+        console.log(`${result.insertedCount} documents were inserted`);
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        await client.close();
+    }
+}
 
-// module.exports = { insertPosts }; 
+insertPosts();
+
+module.exports = { insertPosts }; 

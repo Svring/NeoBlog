@@ -5,6 +5,10 @@ import { RootState } from "@/redux/store";
 import { IPost } from "@/models/Post";
 import { use } from "react";
 import { Flex } from "@radix-ui/themes";
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+import { useEffect, useState } from 'react';
+import { useMDXComponents } from '@/mdx-components';
 
 export default function Page({
     params,
@@ -15,6 +19,20 @@ export default function Page({
     const post = useAppSelector(
         (state: RootState) => state.posts.posts.find((p: IPost) => p._id === postId)
     );
+    const [mdxSource, setMdxSource] = useState<MDXRemoteSerializeResult | null>(null);
+    
+    // Get the custom components
+    const components = useMDXComponents({});
+
+    useEffect(() => {
+        const prepareMdx = async () => {
+            if (post?.content) {
+                const serialized = await serialize(post.content);
+                setMdxSource(serialized);
+            }
+        };
+        prepareMdx();
+    }, [post?.content]);
 
     return (
         <Flex 
@@ -25,7 +43,7 @@ export default function Page({
             className="max-w-[720px] mx-auto px-5 leading-8 prose prose-lg"
             p="4"
         >
-            {post?.content}
+            {mdxSource && <MDXRemote {...mdxSource} components={components} />}
         </Flex>
     );
 }

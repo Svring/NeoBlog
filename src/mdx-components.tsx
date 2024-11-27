@@ -10,10 +10,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ children }) => <Heading size="5" weight="bold" as="h3">{children}</Heading>,
     p: ({ children }) => (
         <Text
-            as="p" 
+            as="p"
             style={{ 
-                lineHeight: "1.8",
-                marginBottom: "1.5rem"  // 段落之间的间距
+                lineHeight: "1.6",
+                marginBottom: "0.5rem"  // 段落之间的间距
             }}
         >
             {children}

@@ -12,11 +12,11 @@ async function insertPosts() {
     
     try {
         // Read the image file and convert to buffer
-        const imagePath = path.join(__dirname, '1818131.png');
+        const imagePath = path.join(__dirname, '../public/1818131.png');
         const imageBuffer = fs.readFileSync(imagePath);
 
         // Read the MDX content
-        const mdxPath = path.join(__dirname, 'Declaration_of_Inception.md');
+        const mdxPath = path.join(__dirname, '../public/Declaration_of_Inception.md');
         const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
 
         await client.connect();
@@ -33,7 +33,7 @@ async function insertPosts() {
             content: mdxContent,  // 使用 MDX 文件内容
             tags: ["Caprice", "Memorial"],
             cover: imageBuffer,
-            
+            createdAt: new Date(),
         }]);
 
         console.log(`${result.insertedCount} documents were inserted`);

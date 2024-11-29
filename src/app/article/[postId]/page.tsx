@@ -40,8 +40,8 @@ export default function Page({
             gap="2" 
             justify="center" 
             align="center"
-            className="max-w-[720px] mx-auto px-5 leading-8 prose prose-lg"
-            p="4"
+            className="max-w-[720px] mx-auto leading-8 prose prose-lg"
+            py="6"
         >
             {mdxSource && <MDXRemote {...mdxSource} components={components} />}
         </Flex>
